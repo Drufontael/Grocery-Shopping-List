@@ -70,7 +70,9 @@
         android:layout_marginStart="8dp"
         android:drawableStart="@drawable/brazilian_real_svgrepo_16"
         android:ems="10"
+        android:hint="valor"
         android:inputType="numberDecimal"
+        android:textAlignment="center"
         app:layout_constraintBaseline_toBaselineOf="@id/text_price"
         app:layout_constraintStart_toEndOf="@+id/text_price" />
 
@@ -88,7 +90,9 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:ems="10"
+        android:hint="qtde"
         android:inputType="number"
+        android:textAlignment="center"
         app:layout_constraintBaseline_toBaselineOf="@id/text_quantity"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/text_quantity" />

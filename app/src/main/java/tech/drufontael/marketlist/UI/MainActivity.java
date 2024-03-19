@@ -12,7 +12,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
-import java.util.Collections;
 import java.util.Locale;
 
 import tech.drufontael.marketlist.R;
@@ -54,7 +53,7 @@ public class MainActivity extends AppCompatActivity {
         mGoodsListViewModel = new ViewModelProvider(this).get(GoodsListViewModel.class);
         mGoodsListViewModel.getList().observe(this, goodsList -> {
 
-            Collections.sort(goodsList);
+            //Collections.sort(goodsList);
             adapter.submitList(goodsList);
             String price = String.format(Locale.getDefault(), "%s %.2f", getString(R.string.currency),
                     mGoodsListViewModel.calculateTotalPrice());
@@ -79,6 +78,7 @@ public class MainActivity extends AppCompatActivity {
         if (requestCode == NEW_WORD_ACTIVITY_REQUEST_CODE && resultCode == RESULT_OK) {
             Good newGood = new Good(data.getStringExtra("goodName"),data.getDoubleExtra("price",0.0),data.getIntExtra("quantity",0));
             mGoodsListViewModel.insert(newGood);
+            adapter.notifyDataSetChanged();
         } else {
             Toast.makeText(
                     getApplicationContext(),

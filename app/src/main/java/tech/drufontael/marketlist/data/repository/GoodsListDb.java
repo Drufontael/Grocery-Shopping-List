@@ -8,6 +8,7 @@ import androidx.lifecycle.MutableLiveData;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 import java.util.concurrent.ExecutorService;
@@ -37,10 +38,10 @@ public class GoodsListDb {
                     .filter(x -> x.getListName().equals(name))
                     .findFirst().orElse(getPadrao().get(0));
             if(Objects.equals(list.getListName(), getPadrao().get(0).getListName())){
-
                 saveList(list.getListName(),list.getGoods());
             }
             inUse=new MutableLiveData<List<Good>>();
+            Collections.sort(list.getGoods());
             inUse.postValue(list.getGoods());
             return inUse;
         }
@@ -57,6 +58,7 @@ public class GoodsListDb {
         @Override
         public void addGood(Good good) {
             inUse.getValue().add(good);
+            Collections.sort(inUse.getValue());
             saveGoodsList();
         }
 
