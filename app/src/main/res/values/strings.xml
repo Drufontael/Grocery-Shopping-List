@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Market List</string>
+    <string name="app_name">CartMate</string>
     <string name="add_good">Add good</string>
     <string name="mercadoria">Mercadoria</string>
     <string name="price_valor">R$ 000,00</string>

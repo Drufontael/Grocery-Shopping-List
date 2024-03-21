@@ -32,6 +32,6 @@ public class GoodsListViewModel extends AndroidViewModel {
 
     public double calculateTotalPrice() {
         return this.list.getValue().stream().filter(Good::isActive)
-                .mapToDouble(Good::getPrice).sum();
+                .mapToDouble(Good::getTotalItemPrice).sum();
     }
 }

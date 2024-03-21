@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="myTopBar">
+        <item name="android:background">@color/primaryDark</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:fontFamily">@font/aclonica</item>
+    </style>
+    <style name="goodLine">
+        <item name="android:fontFamily">@font/akaya_telivigala</item>
+        <item name="android:textStyle">italic</item>
+    </style>
+</resources>
