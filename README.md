@@ -26,8 +26,8 @@ Atualmente, a lista inicial é fixa e só é possível adicionar itens. No entan
 
 ## Contribuindo
 
-Agradecemos suas contribuições! Por favor, leia CONTRIBUTING.md para detalhes sobre o nosso código de conduta e o processo para enviar pedidos pull para nós.
+Agradecemos suas contribuições! Por favor, leia [CONTRIBUTING.md](./CONTRIBUTING.md) para detalhes sobre o nosso código de conduta e o processo para enviar pedidos pull para nós.
 
 ## Licença
 
-Este projeto está licenciado sob a licença MIT - veja o arquivo LICENSE.md para detalhes.
+Este projeto está licenciado sob a licença MIT - veja o arquivo [LICENSE](./LICENSE) para detalhes.
