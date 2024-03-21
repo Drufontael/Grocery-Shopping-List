@@ -2,6 +2,7 @@ package tech.drufontael.marketlist.UI;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -23,9 +24,9 @@ public class MainActivity extends AppCompatActivity {
 
     private static final int NEW_WORD_ACTIVITY_REQUEST_CODE = 1;
     private GoodsListViewModel mGoodsListViewModel;
-    private ViewHolder mViewHolder=new ViewHolder();
+    private final ViewHolder mViewHolder=new ViewHolder();
 
-    private OnGoodEditListener goodEditListener = new OnGoodEditListener() {
+    private final OnGoodEditListener goodEditListener = new OnGoodEditListener() {
         @Override
         public void onEdit(int id, Good good) {
             mGoodsListViewModel.update(id, good);
@@ -66,7 +67,7 @@ public class MainActivity extends AppCompatActivity {
            startActivityForResult(intent, NEW_WORD_ACTIVITY_REQUEST_CODE);
         });
 
-    };
+    }
 
     private static class ViewHolder{
         TextView mtextTotalPrice;
@@ -84,6 +85,20 @@ public class MainActivity extends AppCompatActivity {
                     getApplicationContext(),
                     R.string.empty_not_saved,
                     Toast.LENGTH_LONG).show();
+        }
+    }
+    public void onWindowFocusChanged(boolean hasFocus) {
+        super.onWindowFocusChanged(hasFocus);
+        if (hasFocus) {
+            getWindow().getDecorView().setSystemUiVisibility(
+                    View.SYSTEM_UI_FLAG_IMMERSIVE
+                            | View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+                            | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+                            | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+                            // Esconde nav bar e status bar
+                            | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+                            | View.SYSTEM_UI_FLAG_FULLSCREEN
+            );
         }
     }
 

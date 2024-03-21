@@ -12,7 +12,7 @@ import tech.drufontael.marketlist.data.entities.Good;
 import tech.drufontael.marketlist.data.repository.GoodsListRepository;
 
 public class GoodsListViewModel extends AndroidViewModel {
-    private GoodsListRepository repository;
+    private final GoodsListRepository repository;
     private final LiveData<List<Good>> list;
     public GoodsListViewModel(@NonNull Application application) {
         super(application);

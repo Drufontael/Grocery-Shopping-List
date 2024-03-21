@@ -1,6 +1,5 @@
 package tech.drufontael.marketlist.UI;
 
-import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -45,33 +44,24 @@ public class GoodViewHolder extends RecyclerView.ViewHolder {
                 good.getTotalItemPrice());
         this.mGoodTotalPrice.setText(totalPrice);
 
-        this.mPrice.setOnEditorActionListener(new TextView.OnEditorActionListener() {
-            @Override
-            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-                if (actionId == EditorInfo.IME_ACTION_DONE){
-                    good.setPrice(Double.parseDouble(mPrice.getText().toString()));
-                    goodEditListener.onEdit(good.getId(),good);
-                }
-                return false;
-            }
-        });
-        this.mQuantity.setOnEditorActionListener(new TextView.OnEditorActionListener() {
-            @Override
-            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-                if (actionId == EditorInfo.IME_ACTION_DONE){
-                    good.setQuantity(Integer.parseInt(mQuantity.getText().toString()));
-                    goodEditListener.onEdit(good.getId(),good);
-                }
-                return false;
-            }
-        });
-        this.mGoodName.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                CheckBox checkBox=v.findViewById(R.id.text_good_name);
-                good.setActive(checkBox.isChecked());
+        this.mPrice.setOnEditorActionListener((v, actionId, event) -> {
+            if (actionId == EditorInfo.IME_ACTION_DONE){
+                good.setPrice(Double.parseDouble(mPrice.getText().toString()));
                 goodEditListener.onEdit(good.getId(),good);
             }
+            return false;
+        });
+        this.mQuantity.setOnEditorActionListener((v, actionId, event) -> {
+            if (actionId == EditorInfo.IME_ACTION_DONE){
+                good.setQuantity(Integer.parseInt(mQuantity.getText().toString()));
+                goodEditListener.onEdit(good.getId(),good);
+            }
+            return false;
+        });
+        this.mGoodName.setOnClickListener(v -> {
+            CheckBox checkBox=v.findViewById(R.id.text_good_name);
+            good.setActive(checkBox.isChecked());
+            goodEditListener.onEdit(good.getId(),good);
         });
     }
 

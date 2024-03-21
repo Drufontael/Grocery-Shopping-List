@@ -32,9 +32,9 @@ dependencies {
 
     implementation(libs.appcompat)
     implementation(libs.material)
-    implementation ("androidx.lifecycle:lifecycle-livedata:2.4.0")
-    implementation ("androidx.lifecycle:lifecycle-viewmodel:2.4.0")
-    implementation ("com.google.code.gson:gson:2.8.8")
+    implementation (libs.lifecycle.livedata)
+    implementation (libs.lifecycle.viewmodel)
+    implementation (libs.gson)
     implementation(libs.activity)
     implementation(libs.constraintlayout)
     testImplementation(libs.junit)

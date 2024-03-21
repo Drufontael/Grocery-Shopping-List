@@ -6,14 +6,14 @@ public class Good implements Comparable<Good> {
     private Double mPrice;
     private Integer mQuantity;
     private Boolean mActive;
-    private final Double mTotalItemPrice;
+
 
     public Good(String goodName, Double price, Integer quantity) {
         this.mGoodName = goodName;
         this.mPrice = price;
         this.mQuantity = quantity;
         this.mActive =true;
-        this.mTotalItemPrice=price*quantity;
+
     }
 
     public int getId() {

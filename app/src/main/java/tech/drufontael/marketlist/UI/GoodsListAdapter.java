@@ -11,7 +11,7 @@ import tech.drufontael.marketlist.data.listener.OnGoodEditListener;
 
 public class GoodsListAdapter extends ListAdapter<Good,GoodViewHolder> {
 
-    OnGoodEditListener goodEditListener;
+    private final OnGoodEditListener goodEditListener;
 
 
     protected GoodsListAdapter(@NonNull DiffUtil.ItemCallback<Good> diffCallback, OnGoodEditListener goodEditListener) {

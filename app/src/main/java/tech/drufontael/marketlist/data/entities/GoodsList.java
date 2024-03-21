@@ -6,9 +6,9 @@ import java.util.Date;
 import java.util.List;
 
 public class GoodsList {
-    private String mListName;
-    private Date mDate;
-    private List<Good> mGoods;
+    private final String mListName;
+    private final Date mDate;
+    private final List<Good> mGoods;
     private int mGoodId;
 
     public GoodsList(String listName, List<Good> goods) {

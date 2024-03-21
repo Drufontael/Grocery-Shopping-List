@@ -5,6 +5,16 @@
     <string name="price_valor">R$ 000,00</string>
     <string name="quantity">qtde</string>
     <string name="currency">R$</string>
-    <string name="empty_not_saved">Vazio não salvo.</string>
+    <string name="empty_not_saved">Sem mercadoria para salvar!</string>
+    <string name="nova_mercadoria">Nova Mercadoria</string>
+    <string name="description">Descrição</string>
+    <string name="insira_a_mercadoria">Insira a mercadoria</string>
+    <string name="price">Preço</string>
+    <string name="value">valor</string>
+    <string name="quantidade">Quantidade:</string>
+    <string name="qtde">qtde</string>
+    <string name="adicionar">Adicionar</string>
+    <string name="cancelar">Cancelar</string>
+    <string name="valor_aleatorio">R$ 300</string>
 
 </resources>
