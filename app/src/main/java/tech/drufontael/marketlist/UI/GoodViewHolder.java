@@ -1,5 +1,7 @@
 package tech.drufontael.marketlist.UI;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -62,6 +64,21 @@ public class GoodViewHolder extends RecyclerView.ViewHolder {
             CheckBox checkBox=v.findViewById(R.id.text_good_name);
             good.setActive(checkBox.isChecked());
             goodEditListener.onEdit(good.getId(),good);
+        });
+        this.mGoodName.setOnLongClickListener(v -> {
+            new AlertDialog.Builder(itemView.getContext())
+                    .setTitle(R.string.remover_mercadoria)
+                    .setMessage(R.string.msg_remover_mercadoria)
+                    .setPositiveButton(R.string.sim, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            goodEditListener.remove(good.getId());
+                        }
+                    })
+                    .setNeutralButton(R.string.nao,null)
+                    .show();
+            return false;
+
         });
     }
 

@@ -16,5 +16,9 @@
     <string name="adicionar">Adicionar</string>
     <string name="cancelar">Cancelar</string>
     <string name="valor_aleatorio">R$ 300</string>
+    <string name="remover_mercadoria">Remover Mercadoria</string>
+    <string name="msg_remover_mercadoria">Você relamente deseja remover o item?</string>
+    <string name="sim">Sim</string>
+    <string name="nao">Não</string>
 
 </resources>

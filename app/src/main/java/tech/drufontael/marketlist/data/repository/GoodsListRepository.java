@@ -4,8 +4,6 @@ import android.app.Application;
 
 import androidx.lifecycle.LiveData;
 
-import java.util.List;
-
 import tech.drufontael.marketlist.data.dao.GoodsListDao;
 import tech.drufontael.marketlist.data.entities.Good;
 import tech.drufontael.marketlist.data.entities.GoodsList;
@@ -19,7 +17,7 @@ public class GoodsListRepository {
         dao= db.dao;
     }
 
-    public LiveData<List<Good>> getList(){
+    public GoodsList getList(){
         return dao.loadList("padrao");
     }
 
@@ -37,6 +35,10 @@ public class GoodsListRepository {
         dao.updateGood(id,good);
         });
 
+    }
+
+    public void remove(int id){
+        dao.deleteGood(id);
     }
 
 }

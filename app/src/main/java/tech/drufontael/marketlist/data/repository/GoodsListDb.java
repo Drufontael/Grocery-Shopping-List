@@ -2,9 +2,6 @@ package tech.drufontael.marketlist.data.repository;
 
 import android.content.Context;
 
-import androidx.lifecycle.LiveData;
-import androidx.lifecycle.MutableLiveData;
-
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -23,27 +20,22 @@ public class GoodsListDb {
 
     private static volatile GoodsListDb INSTANCE;
     private static final String FILE_NAME = "goodslists_v2.json";
-    private static String ATUAL_FILE;
+    private static String ATUAL_LIST;
     private static List<GoodsList> mMainList;
-    private static MutableLiveData<List<Good>> inUse;
+    private static GoodsList inUse;
     private static Context CONTEXT;
     private static final int NUMBER_OF_THREADS = 4;
     static final ExecutorService databaseWriteExecutor =
             Executors.newFixedThreadPool(NUMBER_OF_THREADS);
     GoodsListDao dao = new GoodsListDao() {
         @Override
-        public LiveData<List<Good>> loadList(String name) {
-            ATUAL_FILE = name;
+        public GoodsList loadList(String name) {
+            ATUAL_LIST = name;
             GoodsList list = mMainList.stream()
                     .filter(x -> x.getListName().equals(name))
                     .findFirst().orElse(getPadrao().get(0));
-            if (Objects.equals(list.getListName(), getPadrao().get(0).getListName())) {
-                saveList(list.getListName(), list.getGoods());
-            }
-            inUse = new MutableLiveData<>();
-            Collections.sort(list.getGoods());
-            inUse.postValue(list.getGoods());
-            return inUse;
+            inUse=list;
+            return list;
         }
 
         @Override
@@ -57,14 +49,14 @@ public class GoodsListDb {
 
         @Override
         public void addGood(Good good) {
-            Objects.requireNonNull(inUse.getValue()).add(good);
-            Collections.sort(inUse.getValue());
+            Objects.requireNonNull(inUse.getGoods()).add(good);
+            Collections.sort(inUse.getGoods());
             saveGoodsList();
         }
 
         @Override
         public void deleteGood(int id) {
-            List<Good> goods = inUse.getValue();
+            List<Good> goods = inUse.getGoods();
             for (Good g : goods) {
                 if (g.getId() == id) {
                     goods.remove(g);
@@ -76,7 +68,7 @@ public class GoodsListDb {
 
         @Override
         public void updateGood(int id, Good good) {
-            List<Good> goods = inUse.getValue();
+            List<Good> goods = inUse.getGoods();
             for (Good g : goods) {
                 if (g.getId() == id) {
                     g.setPrice(good.getPrice());
@@ -87,7 +79,7 @@ public class GoodsListDb {
 
             }
             saveGoodsList();
-            loadList(ATUAL_FILE);
+            loadList(ATUAL_LIST);
         }
 
         @Override
@@ -138,6 +130,8 @@ public class GoodsListDb {
             e.printStackTrace();
         }
     }
+
+
 
     private List<GoodsList> getPadrao() {
         Good g1 = new Good("Sabão em pó", 20.00, 1);

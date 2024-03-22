@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+import java.util.Collections;
 import java.util.Locale;
 
 import tech.drufontael.marketlist.R;
@@ -31,9 +32,16 @@ public class MainActivity extends AppCompatActivity {
         public void onEdit(int id, Good good) {
             mGoodsListViewModel.update(id, good);
             adapter.notifyDataSetChanged();
-            double totalPriceValue = mGoodsListViewModel.calculateTotalPrice();
+            double totalPriceValue = mGoodsListViewModel.goodsList.getValue().getTotalPrice();
             String price = String.format(Locale.getDefault(), "%s %.2f", getString(R.string.currency), totalPriceValue);
             mViewHolder.mtextTotalPrice.setText(price);
+        }
+
+        @Override
+        public void remove(int id) {
+            mGoodsListViewModel.delete(id);
+            mGoodsListViewModel.getList();
+            adapter.notifyDataSetChanged();
         }
     };
     final GoodsListAdapter adapter = new GoodsListAdapter(new GoodsListAdapter.GoodDiff(), goodEditListener);
@@ -52,12 +60,12 @@ public class MainActivity extends AppCompatActivity {
         mViewHolder.mtextTotalPrice = findViewById(R.id.text_total_price);
 
         mGoodsListViewModel = new ViewModelProvider(this).get(GoodsListViewModel.class);
-        mGoodsListViewModel.getList().observe(this, goodsList -> {
+        mGoodsListViewModel.goodsList.observe(this, goodsList -> {
 
-            //Collections.sort(goodsList);
-            adapter.submitList(goodsList);
+            Collections.sort(goodsList.getGoods());
+            adapter.submitList(goodsList.getGoods());
             String price = String.format(Locale.getDefault(), "%s %.2f", getString(R.string.currency),
-                    mGoodsListViewModel.calculateTotalPrice());
+                    goodsList.getTotalPrice());
             mViewHolder.mtextTotalPrice.setText(price);
         });
 
@@ -71,6 +79,12 @@ public class MainActivity extends AppCompatActivity {
 
     private static class ViewHolder{
         TextView mtextTotalPrice;
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        mGoodsListViewModel.getList();
     }
 
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
