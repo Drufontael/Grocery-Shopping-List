@@ -12,7 +12,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.List;
 
-import tech.drufontael.marketlist.data.entities.GoodsList;
+import tech.drufontael.marketlist.data.model.GoodsList;
 
 public class GoodsListFile {
     public static void saveListToFile(Context context, String fileName, List<GoodsList> goodsList) throws IOException {

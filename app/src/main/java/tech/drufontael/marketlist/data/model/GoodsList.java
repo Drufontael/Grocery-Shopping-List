@@ -1,4 +1,4 @@
-package tech.drufontael.marketlist.data.entities;
+package tech.drufontael.marketlist.data.model;
 
 import java.util.ArrayList;
 import java.util.Calendar;

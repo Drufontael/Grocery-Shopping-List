@@ -20,5 +20,7 @@
     <string name="msg_remover_mercadoria">Você relamente deseja remover o item?</string>
     <string name="sim">Sim</string>
     <string name="nao">Não</string>
+    <string name="nome_da_lista">Nome da lista</string>
+    <string name="data_e_hora">Data e Hora</string>
 
 </resources>

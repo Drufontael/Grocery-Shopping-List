@@ -4,9 +4,12 @@ import android.app.Application;
 
 import androidx.lifecycle.LiveData;
 
+import java.util.List;
+
 import tech.drufontael.marketlist.data.dao.GoodsListDao;
-import tech.drufontael.marketlist.data.entities.Good;
-import tech.drufontael.marketlist.data.entities.GoodsList;
+import tech.drufontael.marketlist.data.model.Good;
+import tech.drufontael.marketlist.data.model.GoodsList;
+import tech.drufontael.marketlist.data.model.SavedList;
 
 public class GoodsListRepository {
     private final GoodsListDao dao;
@@ -39,6 +42,10 @@ public class GoodsListRepository {
 
     public void remove(int id){
         dao.deleteGood(id);
+    }
+
+    public List<SavedList> getSavedLists(){
+        return dao.showLists();
     }
 
 }

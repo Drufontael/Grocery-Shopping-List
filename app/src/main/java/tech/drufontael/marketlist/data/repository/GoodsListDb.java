@@ -12,8 +12,9 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 import tech.drufontael.marketlist.data.dao.GoodsListDao;
-import tech.drufontael.marketlist.data.entities.Good;
-import tech.drufontael.marketlist.data.entities.GoodsList;
+import tech.drufontael.marketlist.data.model.Good;
+import tech.drufontael.marketlist.data.model.GoodsList;
+import tech.drufontael.marketlist.data.model.SavedList;
 import tech.drufontael.marketlist.util.GoodsListFile;
 
 public class GoodsListDb {
@@ -91,6 +92,16 @@ public class GoodsListDb {
                 }
             }
             saveGoodsList();
+        }
+
+        @Override
+        public List<SavedList> showLists() {
+            List<SavedList> savedLists=new ArrayList<>();
+            for(GoodsList l:mMainList){
+                savedLists.add(new SavedList(l.getListName(),l.getDate()));
+            }
+            return savedLists;
+
         }
     };
 

@@ -1,4 +1,4 @@
-package tech.drufontael.marketlist.data.entities;
+package tech.drufontael.marketlist.data.model;
 
 public class Good implements Comparable<Good> {
     private int mId;

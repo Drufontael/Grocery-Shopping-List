@@ -7,8 +7,8 @@ import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
-import tech.drufontael.marketlist.data.entities.Good;
-import tech.drufontael.marketlist.data.entities.GoodsList;
+import tech.drufontael.marketlist.data.model.Good;
+import tech.drufontael.marketlist.data.model.GoodsList;
 import tech.drufontael.marketlist.data.repository.GoodsListRepository;
 
 public class GoodsListViewModel extends AndroidViewModel {

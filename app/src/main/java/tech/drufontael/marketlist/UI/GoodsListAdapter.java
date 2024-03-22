@@ -6,7 +6,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.ListAdapter;
 
-import tech.drufontael.marketlist.data.entities.Good;
+import tech.drufontael.marketlist.data.model.Good;
 import tech.drufontael.marketlist.data.listener.OnGoodEditListener;
 
 public class GoodsListAdapter extends ListAdapter<Good,GoodViewHolder> {

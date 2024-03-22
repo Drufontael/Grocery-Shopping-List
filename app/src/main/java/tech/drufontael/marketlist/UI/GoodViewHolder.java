@@ -16,7 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.Locale;
 
 import tech.drufontael.marketlist.R;
-import tech.drufontael.marketlist.data.entities.Good;
+import tech.drufontael.marketlist.data.model.Good;
 import tech.drufontael.marketlist.data.listener.OnGoodEditListener;
 
 public class GoodViewHolder extends RecyclerView.ViewHolder {

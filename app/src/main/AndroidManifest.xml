@@ -16,6 +16,9 @@
         android:theme="@style/Theme.MarketList"
         tools:targetApi="31">
         <activity
+            android:name=".UI.LoadListActivity"
+            android:exported="false" />
+        <activity
             android:name=".UI.AddGoodActivity"
             android:exported="false" />
         <activity
