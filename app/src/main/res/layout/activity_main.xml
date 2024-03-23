@@ -67,4 +67,14 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
+    <TextView
+        android:id="@+id/text_list_name_show"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="@id/view_top"
+        app:layout_constraintEnd_toEndOf="@id/view_top"
+        android:text="Nome da lista"
+        android:padding="8dp"
+        style="@style/myTopBar"/>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

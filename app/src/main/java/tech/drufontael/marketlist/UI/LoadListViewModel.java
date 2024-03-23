@@ -24,7 +24,14 @@ public class LoadListViewModel extends AndroidViewModel {
         this.mRepository=new GoodsListRepository(application);
     }
 
-    public void getList(){
+    public void getSavedLists(){
         mSavedLists.setValue(mRepository.getSavedLists());
+    }
+
+    public void loadList(String name){
+        mRepository.loadList(name);
+    }
+    public void deleteList(String name){
+        mRepository.deleteList(name);
     }
 }

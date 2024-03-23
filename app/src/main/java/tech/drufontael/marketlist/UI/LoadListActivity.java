@@ -8,12 +8,25 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import tech.drufontael.marketlist.R;
+import tech.drufontael.marketlist.data.listener.OnSavedListAction;
 
 public class LoadListActivity extends AppCompatActivity {
 
     private RecyclerView mRecycleViewSavedLists;
     private SavedListAdapter savedListAdapter=new SavedListAdapter();
     private LoadListViewModel viewModel;
+    private OnSavedListAction listener=new OnSavedListAction() {
+        @Override
+        public void load(String name) {
+            viewModel.loadList(name);
+        }
+
+        @Override
+        public void remove(String name) {
+            viewModel.deleteList(name);
+            viewModel.getSavedLists();
+        }
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,11 +43,18 @@ public class LoadListActivity extends AppCompatActivity {
         mRecycleViewSavedLists.setLayoutManager(new LinearLayoutManager(this));
         mRecycleViewSavedLists.setAdapter(savedListAdapter);
 
+        listeners();
+
+    }
+
+    private void listeners() {
+        savedListAdapter.attachListener(listener);
+
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        viewModel.getList();
+        viewModel.getSavedLists();
     }
 }

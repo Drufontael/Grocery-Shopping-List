@@ -15,40 +15,49 @@ public class GoodsListRepository {
     private final GoodsListDao dao;
     private LiveData<GoodsList> list;
 
-    public GoodsListRepository(Application application){
-        GoodsListDb db=GoodsListDb.getInstance(application);
-        dao= db.dao;
+    public GoodsListRepository(Application application) {
+        GoodsListDb db = GoodsListDb.getInstance(application);
+        dao = db.dao;
     }
 
-    public GoodsList getList(){
-        return dao.loadList("padrao");
+    public GoodsList loadList() {
+        return dao.loadList(null);
+    }
+    public GoodsList loadList(String name) {
+       return dao.loadList(name);
     }
 
-    public void insertGood(Good good){
-        GoodsListDb.databaseWriteExecutor.execute(()->{
+    public void saveList(String name) {
+        dao.saveList(name);
+    }
+
+    public void deleteList(String name){
+        dao.deleteList(name);
+    }
+
+    public void insertGood(Good good) {
+        GoodsListDb.databaseWriteExecutor.execute(() -> {
             dao.addGood(good);
         });
 
     }
 
-    public void updateGood(int id,Good good){
+    public void updateGood(int id, Good good) {
 
-        GoodsListDb.databaseWriteExecutor.execute(()->{
-        dao.updateGood(id,good);
+        GoodsListDb.databaseWriteExecutor.execute(() -> {
+            dao.updateGood(id, good);
         });
 
     }
 
-    public void remove(int id){
+    public void remove(int id) {
         dao.deleteGood(id);
     }
 
-    public List<SavedList> getSavedLists(){
+    public List<SavedList> getSavedLists() {
         return dao.showLists();
     }
 
-    public void saveList(String name){
-        dao.saveList(name);
-    }
+
 
 }

@@ -65,6 +65,7 @@ public class MainActivity extends AppCompatActivity {
 
         mViewHolder.mTextTotalPrice = findViewById(R.id.text_total_price);
         mViewHolder.mImageCart=findViewById(R.id.image_cart);
+        mViewHolder.mTextListNameShow=findViewById(R.id.text_list_name_show);
 
         mGoodsListViewModel = new ViewModelProvider(this).get(GoodsListViewModel.class);
         mGoodsListViewModel.goodsList.observe(this, goodsList -> {
@@ -74,6 +75,7 @@ public class MainActivity extends AppCompatActivity {
             String price = String.format(Locale.getDefault(), "%s %.2f", getString(R.string.currency),
                     goodsList.getTotalPrice());
             mViewHolder.mTextTotalPrice.setText(price);
+            mViewHolder.mTextListNameShow.setText(goodsList.getListName());
         });
 
         FloatingActionButton fab = findViewById(R.id.fab);
@@ -103,6 +105,8 @@ public class MainActivity extends AppCompatActivity {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
                             mGoodsListViewModel.saveList(nameList.getText().toString());
+                            mGoodsListViewModel.loadList(nameList.getText().toString());
+                            mGoodsListViewModel.getList();
                         }
                     })
                     .setNeutralButton("Cancelar",null)
@@ -114,7 +118,9 @@ public class MainActivity extends AppCompatActivity {
 
     private static class ViewHolder{
         TextView mTextTotalPrice;
+        TextView mTextListNameShow;
         ImageView mImageCart;
+
     }
 
     @Override

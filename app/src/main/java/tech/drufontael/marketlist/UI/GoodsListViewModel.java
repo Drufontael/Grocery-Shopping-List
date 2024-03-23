@@ -22,7 +22,7 @@ public class GoodsListViewModel extends AndroidViewModel {
     }
 
     public void getList(){
-        mGoodsList.setValue(repository.getList());
+        mGoodsList.setValue(repository.loadList());
     }
 
     public void insert(Good good){
@@ -40,5 +40,9 @@ public class GoodsListViewModel extends AndroidViewModel {
 
     public void saveList(String name){
         repository.saveList(name);
+    }
+
+    public void loadList(String name) {
+        repository.loadList(name);
     }
 }

@@ -7,7 +7,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
-import java.util.Objects;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -21,7 +20,7 @@ public class GoodsListDb {
 
     private static volatile GoodsListDb INSTANCE;
     private static final String FILE_NAME = "goodslists_v2.json";
-    private static String ATUAL_LIST;
+    private static String ATUAL_LIST="padrao";
     private static List<GoodsList> mMainList;
     private static GoodsList inUse;
     private static Context CONTEXT;
@@ -31,19 +30,18 @@ public class GoodsListDb {
     GoodsListDao dao = new GoodsListDao() {
         @Override
         public GoodsList loadList(String name) {
-            ATUAL_LIST = name;
-            GoodsList list = mMainList.stream()
-                    .filter(x -> x.getListName().equals(name))
+            if(name!=null) ATUAL_LIST=name;
+            inUse = mMainList.stream()
+                    .filter(x -> x.getListName().equals(ATUAL_LIST))
                     .findFirst().orElse(getPadrao().get(0));
-            inUse=list;
-            return list;
+            return inUse;
         }
 
         @Override
         public void saveList(String name) {
             if (mMainList.stream().noneMatch(x -> x.getListName().equals(name))) {
-                List<Good> goods=new ArrayList<>(inUse.getGoods());
-                GoodsList newList = new GoodsList(name,goods);
+                List<Good> goods = new ArrayList<>(inUse.getGoods());
+                GoodsList newList = new GoodsList(name, goods);
                 mMainList.add(newList);
             }
             saveGoodsList();
@@ -51,7 +49,7 @@ public class GoodsListDb {
 
         @Override
         public void addGood(Good good) {
-            Objects.requireNonNull(inUse.getGoods()).add(good);
+            inUse.addGood(good);
             Collections.sort(inUse.getGoods());
             saveGoodsList();
         }
@@ -86,10 +84,12 @@ public class GoodsListDb {
 
         @Override
         public void deleteList(String name) {
-            for (GoodsList l : mMainList) {
-                if (l.getListName().equals(name)) {
-                    mMainList.remove(l);
-                    break;
+            if (!inUse.getListName().equals(name)) {
+                for (GoodsList l : mMainList) {
+                    if (l.getListName().equals(name)) {
+                        mMainList.remove(l);
+                        break;
+                    }
                 }
             }
             saveGoodsList();
@@ -97,9 +97,9 @@ public class GoodsListDb {
 
         @Override
         public List<SavedList> showLists() {
-            List<SavedList> savedLists=new ArrayList<>();
-            for(GoodsList l:mMainList){
-                savedLists.add(new SavedList(l.getListName(),l.getDate()));
+            List<SavedList> savedLists = new ArrayList<>();
+            for (GoodsList l : mMainList) {
+                savedLists.add(new SavedList(l.getListName(), l.getDate()));
             }
             return savedLists;
 
@@ -142,7 +142,6 @@ public class GoodsListDb {
             e.printStackTrace();
         }
     }
-
 
 
     private List<GoodsList> getPadrao() {
