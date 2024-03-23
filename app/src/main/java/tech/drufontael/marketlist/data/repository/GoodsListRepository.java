@@ -33,7 +33,6 @@ public class GoodsListRepository {
 
     public void updateGood(int id,Good good){
 
-
         GoodsListDb.databaseWriteExecutor.execute(()->{
         dao.updateGood(id,good);
         });
@@ -46,6 +45,10 @@ public class GoodsListRepository {
 
     public List<SavedList> getSavedLists(){
         return dao.showLists();
+    }
+
+    public void saveList(String name){
+        dao.saveList(name);
     }
 
 }

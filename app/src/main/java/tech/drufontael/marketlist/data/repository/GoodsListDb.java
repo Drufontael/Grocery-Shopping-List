@@ -40,9 +40,10 @@ public class GoodsListDb {
         }
 
         @Override
-        public void saveList(String name, List<Good> goods) {
+        public void saveList(String name) {
             if (mMainList.stream().noneMatch(x -> x.getListName().equals(name))) {
-                GoodsList newList = new GoodsList(name, goods);
+                List<Good> goods=new ArrayList<>(inUse.getGoods());
+                GoodsList newList = new GoodsList(name,goods);
                 mMainList.add(newList);
             }
             saveGoodsList();

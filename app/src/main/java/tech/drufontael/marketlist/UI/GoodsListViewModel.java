@@ -37,4 +37,8 @@ public class GoodsListViewModel extends AndroidViewModel {
     public void delete(int id){
         repository.remove(id);
     }
+
+    public void saveList(String name){
+        repository.saveList(name);
+    }
 }

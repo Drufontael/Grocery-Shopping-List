@@ -1,8 +1,14 @@
 package tech.drufontael.marketlist.UI;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -17,8 +23,8 @@ import java.util.Collections;
 import java.util.Locale;
 
 import tech.drufontael.marketlist.R;
-import tech.drufontael.marketlist.data.model.Good;
 import tech.drufontael.marketlist.data.listener.OnGoodEditListener;
+import tech.drufontael.marketlist.data.model.Good;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -34,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
             adapter.notifyDataSetChanged();
             double totalPriceValue = mGoodsListViewModel.goodsList.getValue().getTotalPrice();
             String price = String.format(Locale.getDefault(), "%s %.2f", getString(R.string.currency), totalPriceValue);
-            mViewHolder.mtextTotalPrice.setText(price);
+            mViewHolder.mTextTotalPrice.setText(price);
         }
 
         @Override
@@ -57,7 +63,8 @@ public class MainActivity extends AppCompatActivity {
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        mViewHolder.mtextTotalPrice = findViewById(R.id.text_total_price);
+        mViewHolder.mTextTotalPrice = findViewById(R.id.text_total_price);
+        mViewHolder.mImageCart=findViewById(R.id.image_cart);
 
         mGoodsListViewModel = new ViewModelProvider(this).get(GoodsListViewModel.class);
         mGoodsListViewModel.goodsList.observe(this, goodsList -> {
@@ -66,7 +73,7 @@ public class MainActivity extends AppCompatActivity {
             adapter.submitList(goodsList.getGoods());
             String price = String.format(Locale.getDefault(), "%s %.2f", getString(R.string.currency),
                     goodsList.getTotalPrice());
-            mViewHolder.mtextTotalPrice.setText(price);
+            mViewHolder.mTextTotalPrice.setText(price);
         });
 
         FloatingActionButton fab = findViewById(R.id.fab);
@@ -75,10 +82,39 @@ public class MainActivity extends AppCompatActivity {
            startActivityForResult(intent, NEW_WORD_ACTIVITY_REQUEST_CODE);
         });
 
+        mViewHolder.mImageCart.setOnClickListener(view->{
+            Intent intent=new Intent(MainActivity.this,LoadListActivity.class);
+            startActivity(intent);
+        });
+
+        mViewHolder.mImageCart.setOnLongClickListener(view->{
+            EditText nameList=new EditText(this);
+            LinearLayout.LayoutParams layoutParams=new LinearLayout.LayoutParams(
+                    ViewGroup.LayoutParams.WRAP_CONTENT,
+                    ViewGroup.LayoutParams.WRAP_CONTENT
+            );
+            nameList.setLayoutParams(layoutParams);
+            new AlertDialog.Builder(this)
+                    .setTitle("Salvar Nova Lista")
+                    .setMessage("Digite um nome para a lista")
+                    .setView(nameList)
+                    .setCancelable(false)
+                    .setPositiveButton("Salvar", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            mGoodsListViewModel.saveList(nameList.getText().toString());
+                        }
+                    })
+                    .setNeutralButton("Cancelar",null)
+                    .show();
+            return false;
+        });
+
     }
 
     private static class ViewHolder{
-        TextView mtextTotalPrice;
+        TextView mTextTotalPrice;
+        ImageView mImageCart;
     }
 
     @Override
