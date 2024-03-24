@@ -38,23 +38,25 @@ public class GoodViewHolder extends RecyclerView.ViewHolder {
 
         this.mGoodName.setText(good.getGoodName());
         this.mGoodName.setChecked(good.isActive());
-        String price=String.format(Locale.US,"%.2f",
+        String price=String.format(Locale.getDefault(),"%.2f",
                 good.getPrice());
         this.mPrice.setText(price);
         this.mQuantity.setText(String.valueOf(good.getQuantity()));
-        String totalPrice=String.format(Locale.US,"%s %.2f",itemView.getContext().getString(R.string.currency),
+        String totalPrice=String.format(Locale.getDefault(),"%s %.2f",itemView.getContext().getString(R.string.currency),
                 good.getTotalItemPrice());
         this.mGoodTotalPrice.setText(totalPrice);
 
         this.mPrice.setOnEditorActionListener((v, actionId, event) -> {
             if (actionId == EditorInfo.IME_ACTION_DONE){
-                good.setPrice(Double.parseDouble(mPrice.getText().toString()));
+                good.setPrice(Double.parseDouble(mPrice.getText().toString()
+                        .replace(",",".")));
                 goodEditListener.onEdit(good.getId(),good);
             }
             return false;
         });
         this.mQuantity.setOnEditorActionListener((v, actionId, event) -> {
             if (actionId == EditorInfo.IME_ACTION_DONE){
+
                 good.setQuantity(Integer.parseInt(mQuantity.getText().toString()));
                 goodEditListener.onEdit(good.getId(),good);
             }

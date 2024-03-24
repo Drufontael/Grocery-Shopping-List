@@ -42,8 +42,8 @@ public class SavedListViewHold extends RecyclerView.ViewHolder {
 
         mBtnClearLis.setOnClickListener(v -> {
             new AlertDialog.Builder(itemView.getContext())
-                    .setTitle("Remover Lista")
-                    .setMessage("Deseja realmente remover a lista?")
+                    .setTitle(R.string.remover_mercadoria)
+                    .setMessage(R.string.deseja_realmente_remover_lista)
                     .setPositiveButton(R.string.sim, new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {

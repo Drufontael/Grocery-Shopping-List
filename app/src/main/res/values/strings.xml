@@ -22,5 +22,7 @@
     <string name="nao">Não</string>
     <string name="nome_da_lista">Nome da lista</string>
     <string name="data_e_hora">Data e Hora</string>
+    <string name="remover_lista">Remover Lista</string>
+    <string name="deseja_realmente_remover_lista">Deseja realmente remover a lista?</string>
 
 </resources>

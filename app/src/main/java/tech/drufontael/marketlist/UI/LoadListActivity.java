@@ -15,10 +15,11 @@ public class LoadListActivity extends AppCompatActivity {
     private RecyclerView mRecycleViewSavedLists;
     private SavedListAdapter savedListAdapter=new SavedListAdapter();
     private LoadListViewModel viewModel;
-    private OnSavedListAction listener=new OnSavedListAction() {
+    private final OnSavedListAction listener=new OnSavedListAction() {
         @Override
         public void load(String name) {
             viewModel.loadList(name);
+            finish();
         }
 
         @Override
